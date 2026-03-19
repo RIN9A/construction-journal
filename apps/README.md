@@ -28,10 +28,6 @@ https://github.com/user-attachments/assets/61a6bfbc-8dcd-4f12-9534-6cf4e7838bff
 - Статистика: количество записей, исполнителей, видов работ
 - Seed с тестовыми данными для демонстрации
 
-https://github.com/user-attachments/assets/f14fc300-a47d-4e8a-9242-32ff41065adf
-
-
-
 ## Запуск
 
 **Требования:** Docker и Docker Compose.
