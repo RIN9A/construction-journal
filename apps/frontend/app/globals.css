@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+
+:root {
+  --bg:        #0b0d11;
+  --surface:   #111318;
+  --surface-2: #181b22;
+  --surface-3: #1f2330;
+  --border:    rgba(255,255,255,0.07);
+  --border-hover: rgba(255,255,255,0.14);
+  --accent:    #f0a500;
+  --accent-bg: rgba(240,165,0,0.10);
+  --accent-hover: rgba(240,165,0,0.18);
+  --text:      #e2e4ea;
+  --text-2:    #8b8fa8;
+  --text-3:    #4a4f66;
+  --danger:    #e5534b;
+  --danger-bg: rgba(229,83,75,0.10);
+  --success:   #3fb950;
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-xl: 20px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { -webkit-font-smoothing: antialiased; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+::selection { background: var(--accent-bg); color: var(--accent); }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--surface-3); border-radius: 99px; }
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.4);
+  cursor: pointer;
+}

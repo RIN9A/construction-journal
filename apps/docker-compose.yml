@@ -1,0 +1,49 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: construction_db
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: construction_journal
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-ppassword"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  backend:
+    build: ./backend
+    container_name: construction_backend
+    ports:
+      - "3001:3001"
+    environment:
+      DATABASE_URL: mysql://root:password@db:3306/construction_journal
+      PORT: 3001
+    depends_on:
+      db:
+        condition: service_healthy
+    command: >
+      sh -c "npx prisma migrate deploy &&
+              npx prisma db seed &&
+              node dist/main.js"
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        NEXT_PUBLIC_API_URL: http://localhost:3001/api
+    container_name: construction_frontend
+    ports:
+      - "3000:3000"
+    environment:
+      API_URL: http://construction_backend:3001/api
+    depends_on:
+      - backend
+
+volumes:
+  mysql_data:
